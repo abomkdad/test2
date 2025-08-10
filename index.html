@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>عرض Miami</title>
+
+  <!-- ========== Meta Pixel Code ========== -->
+  <script>
+    !function(f,b,e,v,n,t,s){
+      if(f.fbq)return; n=f.fbq=function(){ n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments) };
+      if(!f._fbq)f._fbq=n; n.push=n; n.loaded=!0; n.version='2.0';
+      n.queue=[]; t=b.createElement(e); t.async=!0; t.src=v; s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)
+    }(window, document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '1278802597312896');
+    fbq('track', 'PageView');
+  </script>
+  <noscript>
+    <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1278802597312896&ev=PageView&noscript=1" />
+  </noscript>
+  <!-- ========== /Meta Pixel Code ========== -->
+
+  <!-- ========== Snap Pixel Code (Advanced) ========== -->
+  <script type="text/javascript">
+    (function(e,t,n){
+      if(e.snaptr) return;
+      var a=e.snaptr=function(){ a.handleRequest ? a.handleRequest.apply(a,arguments) : a.queue.push(arguments) };
+      a.queue=[]; var s='script'; var r=t.createElement(s); r.async=!0; r.src=n; var u=t.getElementsByTagName(s)[0]; u.parentNode.insertBefore(r,u);
+    })(window,document,'https://sc-static.net/scevent.min.js');
+
+    snaptr('init','33f9ce6c-9a7e-4019-8023-98c3ead1fdf0',{});
+    snaptr('track','PAGE_VIEW');
+
+    function submitSnapEvents(priceILS){
+      var price = Number(priceILS)||100;
+      snaptr('track','ADD_CART',{
+        price: price,
+        currency: 'ILS',
+        item_ids: ['miami_offer'],
+        item_category: 'Perfume',
+        number_items: 1
+      });
+      snaptr('track','LEAD');
+      snaptr('track','PURCHASE',{
+        transaction_id: 'wa-' + Date.now(),
+        price: price,
+        currency: 'ILS',
+        item_category: 'Perfume',
+        item_ids: ['miami_offer'],
+        number_items: 1
+      });
+    }
+  </script>
+  <!-- ========== /Snap Pixel Code ========== -->
+
+  <!-- ========== TikTok Pixel Code (Advanced) ========== -->
+  <script>
+    !function (w,d,t){
+      w.TiktokAnalyticsObject=t; var ttq=w[t]=w[t]||[];
+      ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+      ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat([].slice.call(arguments,0)))};
+      };
+      for(var i=0;i<ttq.methods.length;i++) ttq.setAndDefer(ttq,ttq.methods[i]);
+      ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js"; ttq._i=ttq._i||{}; ttq._i[e]=[]; ttq._i[e]._u=r; ttq._t=ttq._t||{}; ttq._t[e]=+new Date; ttq._o=ttq._o||{}; ttq._o[e]=n||{}; n=document.createElement("script"); n.type="text/javascript"; n.async=!0; n.src=r+"?sdkid="+e+"&lib="+t; e=document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n,e)};
+      ttq.load('D2B1O33C77U89NHRM5J0');
+      ttq.page();
+      function trackTikTokEvents(priceILS){
+        var price = Number(priceILS)||100; var currency='ILS';
+        ttq.track('AddToCart',{value:price,currency:currency});
+        ttq.track('Lead');
+        ttq.track('CompletePayment',{value:price,currency:currency});
+      }
+      window.trackTikTokEvents = trackTikTokEvents;
+    }(window,document,'ttq');
+  </script>
+  <!-- ========== /TikTok Pixel Code ========== -->
+
+  <style>
+    :root{ --green:#28a745; --bg:#111; --card:#1e1e1e }
+    *{box-sizing:border-box}
+    body{ margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:#fff; direction:rtl }
+    .banner{ width:100%; display:block; max-width:100%; height:auto }
+    .progress-container{ background:#000; padding:20px 0; text-align:center }
+    .progress-wrapper{ background:#fff; border-radius:50px; overflow:hidden; margin:0 auto; width:80%; max-width:400px }
+    .progress-bar{ background:var(--green); width:100%; padding:10px; color:#fff; font-weight:bold; border-radius:50px }
+    .alert{background:#0d6efd;color:#fff;padding:12px 14px;text-align:center;border-radius:10px;border:1px solid rgba(255,255,255,.18);font-weight:700;box-shadow:0 6px 16px rgba(13,110,253,.35);width:calc(100% - 40px);margin:10px auto 0}
+    .form-container{ background:var(--card); padding:20px; margin:20px; border-radius:10px; max-width:500px; margin-left:auto; margin-right:auto }
+    .form-container h2{ text-align:center; color:#fff }
+    .form-group{ margin-bottom:15px }
+    .form-group input,.form-group textarea{ width:100%; padding:10px; border-radius:5px; border:none; background:#333; color:#fff }
+    .form-group textarea{ resize:none }
+    .submit-button{ background:var(--green); border:none; padding:12px; color:#fff; width:100%; font-size:16px; border-radius:5px; cursor:pointer }
+    video{ width:100%; max-height:80vh; display:block; margin:20px auto }
+
+    /* Bottom Fixed Action Bar */
+    .bottom-action-bar{position:fixed;left:0;right:0;bottom:0;z-index:9999;background:#0f0f0f;border-top:1px solid rgba(255,255,255,.1);padding:8px calc(12px + env(safe-area-inset-right)) calc(8px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));display:flex;gap:10px;align-items:stretch;justify-content:space-between;box-shadow:0 -8px 20px rgba(0,0,0,.35)}
+    .bottom-action-bar .btn{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;height:48px;padding:6px 10px;border-radius:12px;border:none;cursor:pointer;font-weight:700;font-size:13.5px;text-decoration:none;line-height:1.2;text-align:center;overflow:hidden}
+    .btn-wa{background:#25D366;color:#0b3d1f;font-size:13px}
+    .btn .btn-ico{display:inline-flex;align-items:center;justify-content:center;font-size:clamp(16px,3.2vw,18px);line-height:1;margin-inline-end:6px}
+    .btn-wa svg{width:1em;height:1em}
+    .btn-wa svg{width:1em;height:1em}
+
+    .btn-pay{background:#007bff;color:#fff;position:relative;flex-direction:row;justify-content:space-between;font-size:13px;text-align:center;padding-inline:12px}
+    .btn-pay-mini{background:#0d6efd;color:#fff;flex:0 0 96px;display:flex;align-items:center;justify-content:center;gap:6px}
+    .btn-pay-mini span{font-weight:800}
+    .btn-pay-mini .icon-card{width:1em;height:1em}
+
+    /* Bottom sheet */
+    .sheet-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);backdrop-filter:saturate(120%) blur(2px);display:grid;place-items:end center;z-index:10050;transition:opacity .25s ease}
+    .sheet-backdrop[hidden]{display:none}
+    .sheet{width:100%;max-width:640px;background:#0f0f0f;border-top-left-radius:20px;border-top-right-radius:20px;padding:18px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -14px 34px rgba(0,0,0,.5);transform:translateY(100%);animation:sheetIn .25s ease forwards}
+    .sheet-handle{width:56px;height:5px;border-radius:6px;background:rgba(255,255,255,.25);margin:0 auto 12px}
+    .sheet-title{text-align:center;margin:0 0 12px;font-size:18px;font-weight:800}
+    .pay-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0 6px}
+    .pay-opt{display:flex;align-items:center;justify-content:center;height:48px;border-radius:12px;font-weight:800;text-decoration:none;color:#fff;border:1px solid rgba(255,255,255,.15)}
+    .pay-opt:hover{filter:brightness(1.05)}
+    .pay-opt:active{transform:translateY(1px)}
+    .pay-opt.pay-bit{background:#0ea5e9}
+    .pay-opt.pay-visa{background:#1a73e8}
+    .pay-opt.pay-apple{background:#111;border-color:#333}
+    .pay-opt.pay-google{background:#1a73e8}
+    .btn-large{height:54px;font-size:14px}
+    .sheet-close{margin:10px auto 0;display:block;background:#1e1e1e;color:#fff;border:1px solid rgba(255,255,255,.15);border-radius:10px;height:40px;padding:0 14px}
+    @keyframes sheetIn{from{transform:translateY(100%)}to{transform:translateY(0)}}
+    body.no-scroll{overflow:hidden}
+    .btn-call{background:#1e1e1e;color:#fff;border:1px solid rgba(255,255,255,.15)}
+    .btn-order{background:#22c55e;color:#fff}
+    .payment-icons{display:flex;gap:3px;margin-top:0;justify-content:center;flex-wrap:nowrap;opacity:.95}
+    .payment-icons .badge{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.22);color:#fff;padding:1px 4px;border-radius:8px;font-weight:600;font-size:9px;letter-spacing:.05px;white-space:nowrap}
+    .payment-icons img{display:none}
+    .payment-icons img{height:clamp(12px,2.6vw,16px);width:auto;display:block;object-fit:contain;opacity:.95}
+    .pay-line{display:flex;align-items:center;gap:5px;justify-content:center;margin-inline-end:6px;white-space:nowrap}
+    .bottom-action-bar .btn .icon{width:clamp(12px,2.8vw,14px);height:clamp(12px,2.8vw,14px);display:inline-block}
+    .bottom-action-bar .btn .icon-house{stroke:currentColor}
+
+    @media (min-width:768px){.bottom-action-bar{width:640px;margin:0 auto;left:0;right:0}}
+    /* Floating call button */
+    .fab-call{position:fixed;right:16px;bottom:calc(88px + env(safe-area-inset-bottom));width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,#06b6d4,#0ea5e9);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 24px rgba(14,165,233,.35);border:none;z-index:10000}
+    .fab-call:hover{filter:brightness(1.05)}
+    .fab-call::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(14,165,233,.3);animation:pulse 2s infinite}
+    @keyframes pulse{0%{transform:scale(.9);opacity:.7}70%{transform:scale(1.1);opacity:0}100%{transform:scale(.9);opacity:0}}
+    @media (min-width:768px){.fab-call{bottom:24px}}
+    @media (max-width:430px){
+      .bottom-action-bar{padding:6px calc(10px + env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) calc(10px + env(safe-area-inset-left))}
+      .bottom-action-bar .btn{height:46px;font-size:13px;border-radius:12px}
+      .payment-icons .badge{font-size:8.5px;padding:1px 4px}
+      .pay-line{gap:4px}
+      .fab-call{width:46px;height:46px;bottom:calc(86px + env(safe-area-inset-bottom))}
+    }
+      .bottom-action-bar .btn{height:50px;font-size:14px;border-radius:12px}
+      .payment-icons .badge{font-size:9px;padding:1px 4px}
+      .pay-line{gap:5px}
+    }
+    .has-bottom-bar{padding-bottom:90px}
+    /* Improve long text handling on WA button */
+    #waText{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+      /* Countdown styles */
+    .countdown-bar{background:#141414;border:1px solid rgba(255,255,255,.08);margin:10px 20px 0;border-radius:12px;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;gap:12px;box-shadow:0 6px 20px rgba(0,0,0,.25)}
+    .countdown-bar .label{font-weight:700}
+    .countdown-bar .group{display:flex;align-items:center;gap:6px}
+    .countdown-bar .num{background:#ff6b00;color:#fff;padding:6px 10px;border-radius:10px;min-width:34px;text-align:center;font-weight:800;letter-spacing:.5px}
+    .countdown-bar .sep{opacity:.8}
+  </style>
+</head>
+<body>
+  <img src="landing page 1.png" alt="عرض Miami" class="banner" />
+
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar">تبقى خطوة لاتمام الطلب</div>
+    </div>
+  </div>
+
+  <div class="alert" id="stockAlert">⏳ تبقّى 5 عملاء فقط يمكنهم الحصول على عرض Miami قبل انتهاء العرض!</div>
+
+  <!-- Countdown Bar -->
+  <div class="countdown-bar" id="countdownBar" aria-live="polite">
+    <span class="label" id="countdownLabel">⏰ العرض ينتهي خلال</span>
+    <div class="group">
+      <span class="num" id="cdH">03</span>
+      <span class="sep">:</span>
+      <span class="num" id="cdM">59</span>
+      <span class="sep">:</span>
+      <span class="num" id="cdS">59</span>
+    </div>
+  </div>
+
+  <div class="form-container" id="orderForm">
+    <h2 id="formTitle">أرغب بطلب عرض عطور Miami</h2>
+    <div class="form-group"><input type="text" id="name" placeholder="الاسم الكامل" /></div>
+    <div class="form-group"><input type="tel" id="phone" placeholder="رقم الهاتف" /></div>
+    <div class="form-group"><input type="text" id="address" placeholder="العنوان" /></div>
+    <div class="form-group"><textarea id="note" rows="3" placeholder="ملاحظة (اختياري)"></textarea></div>
+    <button class="submit-button" onclick="submitForm()" id="submitBtn">تأكيد الطلب</button>
+  </div>
+
+  <video autoplay muted playsinline onclick="toggleMute(this)">
+    <source src="https://madperfume.co.il/upload/07-2025/product/686670909c02e.mp4" type="video/mp4" />
+  </video>
+
+  <!-- Bottom Fixed Action Bar (WhatsApp + Pay Now) -->
+  <div class="bottom-action-bar" dir="rtl" id="bottomBar">
+    <!-- Order Now (scroll to form; COD) -->
+    <button class="btn btn-order" type="button" id="btnOrderBottom" aria-label="اطلب الآن – الدفع عند الاستلام" onclick="onOrderClick()">
+      <span class="btn-ico" aria-hidden="true">
+        <svg viewBox="0 0 32 32" width="1em" height="1em" fill="currentColor" focusable="false" aria-hidden="true"><path d="M26 6H6a2 2 0 00-2 2v16l4-4h18a2 2 0 002-2V8a2 2 0 00-2-2z"/></svg>
+      </span>
+      <span id="orderText">اطلب الآن – الدفع عند الاستلام</span>
+    </button>
+
+    <!-- Mini trigger for Pay sheet -->
+    <button class="btn btn-pay-mini" type="button" id="btnPayTrigger" aria-label="ادفع الآن" onclick="openPaySheet()">
+      <svg class="icon icon-card" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
+      <span id="miniPayLabel">ادفع</span>
+    </button>
+  </div>
+
+  <!-- Pay Bottom Sheet -->
+  <div class="sheet-backdrop" id="paySheet" hidden onclick="if(event.target===this) closePaySheet()">
+    <div class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle">
+      <div class="sheet-handle" aria-hidden="true"></div>
+      <h3 class="sheet-title" id="sheetTitle">الدفع الآن</h3>
+      <div class="pay-grid">
+        <a href="https://meshulam.co.il/purchase?b=d57ad099c6dbffe88767d600ba9789e8" target="_blank" rel="noopener" class="pay-opt pay-bit" onclick="trackAllPurchases(100)" aria-label="Bit">Bit</a>
+        <a href="https://meshulam.co.il/purchase?b=d57ad099c6dbffe88767d600ba9789e8" target="_blank" rel="noopener" class="pay-opt pay-visa" onclick="trackAllPurchases(100)" aria-label="VISA">VISA</a>
+        <a href="https://meshulam.co.il/purchase?b=d57ad099c6dbffe88767d600ba9789e8" target="_blank" rel="noopener" class="pay-opt pay-apple" onclick="trackAllPurchases(100)" aria-label="Apple Pay">Apple Pay</a>
+        <a href="https://meshulam.co.il/purchase?b=d57ad099c6dbffe88767d600ba9789e8" target="_blank" rel="noopener" class="pay-opt pay-google" onclick="trackAllPurchases(100)" aria-label="Google Pay">Google Pay</a>
+      </div>
+      <button class="sheet-close" type="button" onclick="closePaySheet()">إغلاق</button>
+    </div>
+  </div>
+
+  <!-- Floating Call Button -->
+  <a href="tel:+972506164130" class="fab-call" id="fabCall" aria-label="اتصال" onclick="onCallClick()">
+    <svg viewBox="0 0 24 24" width="1.25em" height="1.25em" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.08 4.18 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.72c.12.9.3 1.77.57 2.61a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.47-1.03a2 2 0 0 1 2.11-.45c.84.27 1.71.45 2.61.57A2 2 0 0 1 22 16.92z"/></svg>
+  </a>
+
+  <script>
+    const GROUP_NAME = 'Miami';
+    function toggleMute(video){ video.muted = !video.muted }
+
+    function submitForm(){
+      var name = document.getElementById('name').value.trim();
+      var phone = document.getElementById('phone').value.trim();
+      var address = document.getElementById('address').value.trim();
+      var note = document.getElementById('note').value.trim();
+      var product = GROUP_NAME; // ثابت: اسم المجموعة
+
+      var lang = navigator.language || navigator.userLanguage; var isHebrew = (lang||'').includes('he');
+      var message = isHebrew
+        ? `שלום, אני מעוניין לבצע הזמנה עבור חבילת ${GROUP_NAME}
+👤 שם: ${name}
+📞 טלפון: ${phone}
+🏠 כתובת: ${address}
+📝 הערה: ${note || 'ללא'}`
+        : `مرحباً، أود طلب مجموعة ${GROUP_NAME}
+👤 الاسم: ${name}
+📞 الهاتف: ${phone}
+🏠 العنوان: ${address}
+📝 ملاحظة: ${note || 'لا يوجد'}`;
+
+      var encodedMessage = encodeURIComponent(message);
+      var url = `https://wa.me/972506164130?text=${encodedMessage}`;
+
+      // Track (Meta + TikTok + Snap)
+      fbq('track','Lead');
+      fbq('track','Purchase',{value:100,currency:'ILS'});
+      try{ trackTikTokEvents(100); }catch(e){}
+      try{ submitSnapEvents(100); }catch(e){}
+
+      window.open(url,'_blank');
+    }
+
+    // Lead tracking for WhatsApp / Call / Order buttons
+    function trackAllLeads(){
+      try{ fbq('track','Lead'); }catch(e){}
+      try{ ttq.track('Lead'); }catch(e){}
+      try{ snaptr('track','LEAD'); }catch(e){}
+    }
+    function onCallClick(){ trackAllLeads(); }
+    function setPaySheetLang(){
+      var lang = navigator.language || navigator.userLanguage || 'ar';
+      var sh = document.getElementById('sheetTitle');
+      var psLbl = document.querySelector('#btnPaySheet .pay-line span');
+      var closeBtn = document.querySelector('.sheet-close');
+      if(lang.includes('he')){
+        if(sh) sh.innerText='שלם עכשיו';
+        if(psLbl) psLbl.innerText='שלם עכשיו';
+        if(closeBtn) closeBtn.innerText='סגור';
+        var mini=document.getElementById('miniPayLabel'); if(mini) mini.innerText='שלם';
+      }else{
+        if(sh) sh.innerText='الدفع الآن';
+        if(psLbl) psLbl.innerText='ادفع الآن';
+        if(closeBtn) closeBtn.innerText='إغلاق';
+        var mini2=document.getElementById('miniPayLabel'); if(mini2) mini2.innerText='ادفع';
+      }
+    }
+    function onOrderClick(){ trackAllLeads(); scrollToOrder(); }
+    function openPaySheet(){ setPaySheetLang(); document.getElementById('paySheet').hidden=false; document.body.classList.add('no-scroll'); trackAllLeads(); }
+    function closePaySheet(){ document.getElementById('paySheet').hidden=true; document.body.classList.remove('no-scroll'); }
+    window.addEventListener('keydown',function(e){ if(e.key==='Escape'){ closePaySheet(); }});
+
+    // Purchase tracking for pay button
+    function trackAllPurchases(priceILS){
+      var price = Number(priceILS)||100;
+      try{ fbq('track','Purchase',{value:price,currency:'ILS'}); }catch(e){}
+      try{ ttq.track('CompletePayment',{value:price,currency:'ILS'}); }catch(e){}
+      try{
+        snaptr('track','PURCHASE',{
+          transaction_id:'meshulam-'+Date.now(),
+          price:price,
+          currency:'ILS',
+          item_category:'Perfume',
+          item_ids:['miami_offer'],
+          number_items:1
+        });
+      }catch(e){}
+    }
+
+    // Build dynamic WhatsApp CTA (button text + link) using group name
+    // (Removed WhatsApp CTA button builder as per new layout)
+
+    // Countdown logic (AR/HE)
+    function getCountdownTarget(){
+      try{ var url = new URL(window.location.href); var exp = url.searchParams.get('exp'); if(exp){ var d = new Date(exp); if(!isNaN(d)) return d.getTime(); } }catch(e){}
+      return Date.now() + (3*60*60*1000); // +3h default
+    }
+    var _cdTarget = getCountdownTarget();
+    function _pad2(n){ return (n<10?'0':'')+n; }
+    function setCountdownLang(){
+      var lang = navigator.language || navigator.userLanguage || 'ar';
+      var lbl = document.getElementById('countdownLabel'); if(!lbl) return;
+      lbl.textContent = (lang.includes('he')? '⏰ ההצעה מסתיימת בעוד' : '⏰ العرض ينتهي خلال');
+    }
+    function updateCountdown(){
+      var now = Date.now(); var diff = Math.max(0, _cdTarget - now);
+      var h = Math.floor(diff/3600000); var m = Math.floor((diff%3600000)/60000); var s = Math.floor((diff%60000)/1000);
+      var elH=document.getElementById('cdH'), elM=document.getElementById('cdM'), elS=document.getElementById('cdS');
+      if(elH) elH.textContent=_pad2(h); if(elM) elM.textContent=_pad2(m); if(elS) elS.textContent=_pad2(s);
+      if(diff<=0){ clearInterval(_cdTimer); var bar=document.getElementById('countdownBar'); if(bar){ var lang=navigator.language||navigator.userLanguage||'ar'; bar.querySelector('#countdownLabel').textContent = (lang.includes('he')?'⏰ ההצעה הסתיימה היום':'⏰ انتهى العرض اليوم'); } }
+    }
+    setCountdownLang();
+    var _cdTimer = setInterval(updateCountdown, 1000); updateCountdown();
+
+    // Locale adjustments (Hebrew) for main UI
+    (function(){
+      var lang = navigator.language || navigator.userLanguage || 'ar';
+      if(lang.includes('he')){
+        var t; if((t=document.getElementById('formTitle'))) t.innerText='אני מעוניין להזמין את מבצע הבשמים של Miami';
+        if((t=document.getElementById('name'))) t.placeholder='השם המלא';
+        if((t=document.getElementById('phone'))) t.placeholder='מספר טלפון';
+        if((t=document.getElementById('address'))) t.placeholder='כתובת';
+        if((t=document.getElementById('note'))) t.placeholder='הערה (לא חובה)';
+        if((t=document.getElementById('submitBtn'))) t.innerText='אישור ההזמנה';
+        var pb=document.querySelector('.progress-bar'); if(pb) pb.innerText='נשאר שלב אחד להשלמת ההזמנה';
+        var sa=document.getElementById('stockAlert'); if(sa) sa.innerText='⏳ נותרו רק 5 לקוחות שיכולים להזמין את ההצעה לפני סיומה!';
+        var miniLbl=document.getElementById('miniPayLabel'); if(miniLbl) miniLbl.innerText='שלם';
+        var sh=document.getElementById('sheetTitle'); if(sh) sh.innerText='שלם עכשיו';
+        var psLbl=document.querySelector('#btnPaySheet .pay-line span'); if(psLbl) psLbl.innerText='שלם עכשיו';
+        var cls=document.querySelector('.sheet-close'); if(cls) cls.innerText='סגור';
+        var fab=document.getElementById('fabCall'); if(fab) fab.setAttribute('aria-label','שיחה');
+        var ord=document.getElementById('orderText'); if(ord) ord.innerText='הזמן עכשיו – תשלום במעמד המסירה';
+        var ordBtn=document.getElementById('btnOrderBottom'); if(ordBtn) ordBtn.setAttribute('aria-label','הזמן עכשיו – תשלום במעמד המסירה');
+        var payBtn=document.getElementById('btnPayTrigger'); if(payBtn) payBtn.setAttribute('aria-label','שלם עכשיו');
+        var paySheetBtn=document.getElementById('btnPaySheet'); if(paySheetBtn) paySheetBtn.setAttribute('aria-label','שלם עכשיו');
+      }else{
+        var payBtn2=document.getElementById('btnPayTrigger'); if(payBtn2) payBtn2.setAttribute('aria-label','ادفع الآن');
+        var paySheetBtn2=document.getElementById('btnPaySheet'); if(paySheetBtn2) paySheetBtn2.setAttribute('aria-label','ادفع الآن');
+        var sh2=document.getElementById('sheetTitle'); if(sh2) sh2.innerText='الدفع الآن';
+        var psLbl2=document.querySelector('#btnPaySheet .pay-line span'); if(psLbl2) psLbl2.innerText='ادفع الآن';
+        var cls2=document.querySelector('.sheet-close'); if(cls2) cls2.innerText='إغلاق';
+        var fabAr=document.getElementById('fabCall'); if(fabAr) fabAr.setAttribute('aria-label','اتصال');
+        var ord2=document.getElementById('orderText'); if(ord2) ord2.innerText='اطلب الآن – الدفع عند الاستلام';
+        var ordBtn2=document.getElementById('btnOrderBottom'); if(ordBtn2) ordBtn2.setAttribute('aria-label','اطلب الآن – الدفع عند الاستلام');
+      }
+      try{ document.body.classList.add('has-bottom-bar'); }catch(e){}
+    })();
+
+    function scrollToOrder(){
+      var el = document.getElementById('orderForm') || document.querySelector('.form-container, form, #form');
+      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    }
+  </script>
+</body>
+</html>
