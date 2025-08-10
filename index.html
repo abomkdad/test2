@@ -64,7 +64,7 @@
 
     .alert{ background:#0f172a; color:#cbd5e1; padding:10px; text-align:center }
     .alert .accent{ color:#60a5fa; font-weight:700 }
-    .countdown{ font-weight:800; color:#fbbf24; } /* لون تحفيزي */
+    .countdown{ font-weight:800; color:#fbbf24; }
 
     .form-container{ background:var(--card); padding:20px; margin:20px; border-radius:12px; max-width:520px; margin-left:auto; margin-right:auto }
     .form-container h2{ text-align:center; margin-top:0 }
@@ -104,32 +104,52 @@
     .pay-bit{ background:#0ea5e9 } .pay-visa{ background:#1a73e8 } .pay-apple{ background:#111; border-color:#333 } .pay-gpay{ background:#0b5; color:#041 }
     .sheet-close{ display:block; text-align:center; margin-top:8px; color:#9ca3af; text-decoration:underline; cursor:pointer }
 
-    /* ===== WhatsApp-like Preview Modal ===== */
-    .wa-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;z-index:10050}
-    .wa-overlay.open{display:block}
-    .wa-sheet{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(560px,92vw);max-height:88vh;background:#0f1112;border-radius:16px;box-shadow:0 30px 80px rgba(0,0,0,.5);overflow:hidden;z-index:10051;border:1px solid rgba(255,255,255,.08)}
-    .wa-top{display:flex;align-items:center;gap:12px;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.08);background:#111316}
-    .wa-avatar{width:36px;height:36px;border-radius:50%;background:#22c55e;display:flex;align-items:center;justify-content:center;font-weight:900;color:#0b1b10}
-    .wa-title{font-weight:800}
-    .wa-sub{font-size:12px;color:#9ca3af}
-    .wa-close{margin-inline-start:auto;background:transparent;border:none;color:#9ca3af;font-size:22px;cursor:pointer}
-    .wa-chat{background:#0a0c0d;padding:14px;height:min(56vh,420px);overflow:auto}
-    .wa-bubble{display:inline-block;background:#1f2937;color:#e5e7eb;padding:10px 12px;border-radius:14px 14px 4px 14px;line-height:1.6;max-width:92%}
-    .wa-bubble p{margin:0}
-    .wa-time{margin-top:8px;font-size:11px;color:#9ca3af}
-    .wa-actions{display:flex;gap:10px;padding:12px;border-top:1px solid rgba(255,255,255,.08);background:#0f1112}
-    .wa-btn{flex:1;height:48px;border-radius:10px;border:none;cursor:pointer;font-weight:800;font-size:15px}
-    .wa-btn-edit{background:#1e293b;color:#e5e7eb}
-    .wa-btn-send{background:#22c55e;color:#0b1b10}
-    @media (max-width:420px){
-      .wa-sheet{width:96vw}
-      .wa-bubble{font-size:14px}
-      .wa-btn{height:46px;font-size:14px}
+    /* ===== WhatsApp-like Preview Modal (واقعي + أيقونة رسمية) ===== */
+    .wa-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);backdrop-filter:blur(2px);display:none;z-index:9998}
+    .wa-overlay[aria-hidden="false"]{display:block}
+    .wa-sheet{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:clamp(320px,92vw,520px);
+              border-radius:16px 16px 0 0;overflow:hidden;background:#111;box-shadow:0 -20px 60px rgba(0,0,0,.45);z-index:9999}
+    .wa-top{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:10px;
+           padding:12px 14px;background:#202c33;color:#e9edef;border-bottom:1px solid #1f2c33}
+    .wa-avatar{grid-column:1;display:grid;place-items:center;width:36px;height:36px;border-radius:50%;
+               background:#1f2c34;border:1px solid #2a3942}
+    .wa-avatar img{width:22px;height:22px;display:block}
+    .wa-head{grid-column:2;min-width:0}
+    .wa-title{margin:0;font-size:15px;font-weight:800;letter-spacing:.2px;color:#e9edef}
+    .wa-sub{margin:2px 0 0;font-size:12px;color:#9aa9b2}
+    .wa-close{grid-column:3;background:transparent;border:0;color:#9aa9b2;font-size:20px;cursor:pointer}
+
+    /* خلفية محادثة بنمط واتساب */
+    .wa-chat{
+      background:
+        radial-gradient(circle at 24px 24px,#1e2a33 1px,transparent 2px) 0 0/48px 48px,
+        radial-gradient(circle at 12px 12px,#1b262e 1px,transparent 2px) 0 0/48px 48px,
+        #0b141a;
+      min-height:220px;max-height:46vh;overflow:auto;padding:14px 12px;
+    }
+    .wa-msg{display:flex;gap:10px;margin:8px 0}
+    .wa-bubble{max-width:92%;padding:10px 12px;border-radius:12px 12px 0 12px;background:#005c4b;color:#e7ffef;font-size:14px;line-height:1.5}
+    .wa-time{display:block;margin-top:6px;font-size:11px;opacity:.75;text-align:left;color:#a6b3b9}
+
+    /* منطقة التأكيد */
+    .wa-consent{padding:10px 12px;background:#0f1112;border-top:1px solid #1f2c33;color:#e9edef}
+    .wa-consent label{display:flex;align-items:flex-start;gap:8px;cursor:pointer}
+    .wa-consent small{color:#f59e0b;font-weight:700}
+    .wa-actions{display:flex;gap:10px;align-items:center;padding:10px;background:#111;border-top:1px solid #1f2c33}
+    .wa-primary{flex:1;height:46px;border:0;border-radius:10px;background:#25D366;color:#072b12;font-weight:800;font-size:15px;cursor:not-allowed;opacity:.5}
+    .wa-primary.enabled{cursor:pointer;opacity:1}
+    .wa-secondary{height:46px;padding:0 14px;border-radius:10px;border:1px solid #2a3942;background:#1f2c34;color:#e9edef;cursor:pointer}
+
+    @media (max-width:480px){
+      .wa-bubble{max-width:95%}
+      .wa-title{font-size:14px}
+      .bottom-action-bar .btn{height:46px;font-size:14px}
+      .call-fab{bottom:86px}
     }
   </style>
 </head>
 <body>
-  <img src="marvel ar.png" alt="عرض ميامي" class="banner" />
+  <img src="Untitled design (6).png" alt="عرض ميامي" class="banner" />
 
   <div class="progress-container">
     <div class="progress-wrapper">
@@ -158,11 +178,10 @@
       <input type="hidden" name="campaign" id="utm_campaign" value="">
       <input type="hidden" name="adset"    id="utm_medium"   value="">
       <input type="hidden" name="ad"       id="utm_ad"       value="">
-      <input type="hidden" name="channel"  value="Web Form">
+      <input type="hidden" name="channel"  id="channelField" value="HTML Channel (WA Modal)">
       <input type="hidden" name="description" id="descField" value="طلب مجموعة ميامي (الدفع عند الاستلام)">
 
-      <!-- هذا الزر سيفتح معاينة واتساب -->
-      <button class="submit-button" type="button" id="submitBtn">تأكيد الطلب (الدفع عند الاستلام)</button>
+      <button class="submit-button" type="button" id="submitBtn">اطلب الآن – الدفع عند الاستلام</button>
       <div class="ok-note" id="okNote">✅ تم استلام طلبك، سنتواصل معك قريبًا</div>
     </form>
   </div>
@@ -192,26 +211,40 @@
     <span class="sheet-close" onclick="closePaySheet()" id="sheetClose">إغلاق</span>
   </div>
 
-  <!-- WhatsApp Preview Modal -->
-  <div class="wa-overlay" id="waOverlay" aria-hidden="true">
-    <div class="wa-sheet" role="dialog" aria-labelledby="waTitle">
+  <!-- نافذة واتساب مع خطوة تأكيد غير قابلة للتراجع -->
+  <div class="wa-overlay" id="waOverlay" aria-hidden="true" onclick="if(event.target.id==='waOverlay'){closeWAModal()}">
+    <div class="wa-sheet" dir="rtl" role="dialog" aria-modal="true" aria-labelledby="waTitle">
       <div class="wa-top">
-        <div class="wa-avatar" aria-hidden="true">WA</div>
-        <div>
-          <div class="wa-title" id="waTitle">تأكيد الطلب عبر واتساب</div>
-          <div class="wa-sub" id="waSub">سيتم إرسال الرسالة التالية إلى فريق ميامي</div>
+        <div class="wa-avatar">
+          <img alt="WhatsApp" src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png">
         </div>
-        <button class="wa-close" type="button" onclick="closeWAModal()" aria-label="إغلاق">×</button>
+        <div class="wa-head">
+          <h3 class="wa-title" id="waTitle">تأكيد الطلب عبر واتساب</h3>
+          <p class="wa-sub" id="waSub">سيتم إرسال الرسالة إلى فريق المبيعات للمتابعة فورًا</p>
+        </div>
+        <button class="wa-close" type="button" aria-label="إغلاق" onclick="closeWAModal()">✕</button>
       </div>
 
-      <div class="wa-chat">
-        <div class="wa-bubble"><p id="waMsgPreview">—</p></div>
-        <div class="wa-time" id="waMsgTime">الآن</div>
+      <div class="wa-chat" id="waPreview">
+        <div class="wa-msg" id="waMsg">
+          <div class="wa-bubble" id="waText">…</div>
+        </div>
+        <span class="wa-time" id="waTime"></span>
+      </div>
+
+      <!-- خطوة التأكيد: غير قابلة للتراجع -->
+      <div class="wa-consent">
+        <label>
+          <input type="checkbox" id="waConfirm" style="margin-top:3px" />
+          <span id="waConfirmText">
+            <small>تنبيه مهم:</small> هذه الخطوة <b>غير قابلة للتراجع</b> — بالضغط على «إرسال عبر واتساب – تأكيد الطلب» سيتم إنشاء طلب مؤكد باسمك. إذا لم تكن جاهزًا، يرجى الرجوع وتعديل البيانات.
+          </span>
+        </label>
       </div>
 
       <div class="wa-actions">
-        <button class="wa-btn wa-btn-edit" type="button" onclick="closeWAModal()" id="waEditBtn">تعديل المعلومات</button>
-        <button class="wa-btn wa-btn-send" type="button" onclick="confirmAndSendWA()" id="waSendBtn">تأكيد الطلب عبر واتساب</button>
+        <button class="wa-secondary" type="button" onclick="closeWAModal()" id="waCancelBtn">إلغاء</button>
+        <button class="wa-primary" type="button" onclick="confirmAndSendWA()" id="waSendBtn" disabled>إرسال عبر واتساب – تأكيد الطلب</button>
       </div>
     </div>
   </div>
@@ -219,7 +252,6 @@
   <script>
     function toggleMute(video){ video.muted = !video.muted }
 
-    // Scroll to form
     function scrollToOrder(){
       var el = document.getElementById('orderForm');
       if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
@@ -254,7 +286,7 @@
 
     // عدّاد انتهاء العرض (ساعتان من فتح الصفحة)
     (function countdownStart(){
-      var end = Date.now() + 2*60*60*1000; // 2 ساعات
+      var end = Date.now() + 2*60*60*1000;
       var el = document.getElementById('countdown');
       function tick(){
         var diff = end - Date.now();
@@ -268,69 +300,82 @@
       tick();
     })();
 
-    // ===== WhatsApp Preview Modal logic =====
+    // ===== WhatsApp Modal =====
     (function(){
       const WA_NUMBER = "972506164130";
       const isHe = (navigator.language||'').includes('he');
 
       const TXT = isHe ? {
-        previewTitle: "אישור הזמנה בוואטסאפ",
-        previewSub:   "ההודעה הבאה תישלח לצוות מיאמי",
-        edit:         "עריכה",
-        send:         "אישור הזמנה בוואטסאפ",
-        now:          "עכשיו",
-        msg: (name,phone,address,note,product)=> 
-          `שלום, אני מעוניין/ת להזמין את חבילת ${product}:\n`+
-          `👤 שם: ${name||"-"}\n`+
-          `📞 טלפון: ${phone||"-"}\n`+
-          `🏠 כתובת: ${address||"-"}\n`+
-          `📝 הערה: ${note||"אין"}`,
-        product: "מיאמי"
+        title:"אישור הזמנה בוואטסאפ",
+        sub:"ההודעה תישלח מיד לצוות המכירות",
+        warnHTML:'<small>אזהרה חשובה:</small> פעולה זו <b>בלתי הפיכה</b> — בלחיצה על "שליחה בוואטסאפ – אישור הזמנה" תיווצר הזמנה מאושרת על שמך. אם אינך מוכן, חזור וערוך את הפרטים.',
+        cancel:"ביטול",
+        send:"שליחה בוואטסאפ – אישור הזמנה",
+        now:"עכשיו",
+        btnForm:"הזמן עכשיו – תשלום בעת המסירה",
+        pay:"שלם עכשיו",
+        orderBottom:"הזמן עכשיו – תשלום בעת המסירה",
+        msg:(n,p,a,nn)=>
+          `שלום, אני מעוניין/ת בחבילת מיאמי:\n`+
+          `👤 שם: ${n||"-"}\n📞 טלפון: ${p||"-"}\n🏠 כתובת: ${a||"-"}\n📝 הערה: ${nn||"אין"}`
       } : {
-        previewTitle: "تأكيد الطلب عبر واتساب",
-        previewSub:   "سيتم إرسال الرسالة التالية إلى فريق ميامي",
-        edit:         "تعديل المعلومات",
-        send:         "تأكيد الطلب عبر واتساب",
-        now:          "الآن",
-        msg: (name,phone,address,note,product)=>
-          `مرحباً، أود طلب مجموعة ${product}:\n`+
-          `👤 الاسم: ${name||"-"}\n`+
-          `📞 الهاتف: ${phone||"-"}\n`+
-          `🏠 العنوان: ${address||"-"}\n`+
-          `📝 ملاحظة: ${note||"لا يوجد"}`,
-        product: "ميامي"
+        title:"تأكيد الطلب عبر واتساب",
+        sub:"سيتم إرسال الرسالة فورًا إلى فريق المبيعات",
+        warnHTML:'<small>تنبيه مهم:</small> هذه الخطوة <b>غير قابلة للتراجع</b> — بالضغط على «إرسال عبر واتساب – تأكيد الطلب» سيتم إنشاء طلب مؤكد باسمك. إن لم تكن جاهزًا، ارجع وعدّل البيانات.',
+        cancel:"إلغاء",
+        send:"إرسال عبر واتساب – تأكيد الطلب",
+        now:"الآن",
+        btnForm:"اطلب الآن – الدفع عند الاستلام",
+        pay:"ادفع الآن",
+        orderBottom:"اطلب الآن – الدفع عند الاستلام",
+        msg:(n,p,a,nn)=>
+          `مرحبًا، أرغب بالحصول على مجموعة ميامي:\n`+
+          `👤 الاسم: ${n||"-"}\n📞 الهاتف: ${p||"-"}\n🏠 العنوان: ${a||"-"}\n📝 ملاحظة: ${nn||"لا يوجد"}`
       };
 
       function buildMessage(){
-        const name = document.getElementById("name")?.value?.trim();
-        const phone = document.getElementById("phone")?.value?.trim();
-        const address = document.getElementById("address")?.value?.trim();
-        const note = document.getElementById("note")?.value?.trim();
-        return TXT.msg(name, phone, address, note, TXT.product);
+        const n=document.getElementById('name')?.value?.trim();
+        const p=document.getElementById('phone')?.value?.trim();
+        const a=document.getElementById('address')?.value?.trim();
+        const nn=document.getElementById('note')?.value?.trim();
+        return TXT.msg(n,p,a,nn);
       }
 
-      window.openWhatsAppPreview = function(){
-        const phone = document.getElementById("phone")?.value?.trim();
-        const name  = document.getElementById("name")?.value?.trim();
-        if(!name || !phone){
-          alert(isHe ? "נא למלא שם ומספר טלפון" : "يرجى تعبئة الاسم ورقم الهاتف");
-          return;
-        }
-        const msg = buildMessage();
-        document.getElementById('waTitle').innerText = TXT.previewTitle;
-        document.getElementById('waSub').innerText   = TXT.previewSub;
-        document.getElementById('waEditBtn').innerText = TXT.edit;
-        document.getElementById('waSendBtn').innerText = TXT.send;
-        document.getElementById('waMsgPreview').innerHTML = msg.replace(/\n/g,'<br>');
-        document.getElementById('waMsgTime').innerText = TXT.now;
+      window.openWAModal = function(){
+        const n=document.getElementById('name')?.value?.trim();
+        const p=document.getElementById('phone')?.value?.trim();
+        if(!n || !p){ alert(isHe?'נא למלא שם ומספר טלפון':'يرجى تعبئة الاسم ورقم الهاتف'); return; }
 
-        document.getElementById('waOverlay').classList.add('open');
-        document.body.style.overflow = 'hidden';
+        document.getElementById('waTitle').textContent = TXT.title;
+        document.getElementById('waSub').textContent   = TXT.sub;
+        document.getElementById('waConfirmText').innerHTML = TXT.warnHTML;
+        document.getElementById('waCancelBtn').textContent = TXT.cancel;
+        const sendBtn = document.getElementById('waSendBtn');
+        sendBtn.textContent = TXT.send;
+
+        const d=new Date();
+        document.getElementById('waTime').textContent = TXT.now + ' • ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+        document.getElementById('waText').textContent = buildMessage();
+
+        // إعادة ضبط التأكيد
+        const cb = document.getElementById('waConfirm');
+        cb.checked = false;
+        sendBtn.disabled = true;
+        sendBtn.classList.remove('enabled');
+
+        // تفعيل الزر عند الموافقة
+        cb.onchange = function(){
+          sendBtn.disabled = !cb.checked;
+          sendBtn.classList.toggle('enabled', cb.checked);
+        };
+
+        document.getElementById('waOverlay').setAttribute('aria-hidden','false');
+        document.body.style.overflow='hidden';
       };
 
       window.closeWAModal = function(){
-        document.getElementById('waOverlay').classList.remove('open');
-        document.body.style.overflow = '';
+        document.getElementById('waOverlay').setAttribute('aria-hidden','true');
+        document.body.style.overflow='';
       };
 
       function trackLikelyWAOpen(){
@@ -348,17 +393,25 @@
       }
 
       window.confirmAndSendWA = function(){
+        // لو الزر لسه مقفول ما نعمل شيء
+        const sendBtn = document.getElementById('waSendBtn');
+        if(sendBtn.disabled) return;
+
         const message = buildMessage();
         const url = `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
 
+        // Pixels
         const eid = 'wa-send-'+Date.now();
         try{ fbq('track','Lead',{value:0,currency:'ILS'},{eventID:eid}); }catch(_){}
         try{ ttq.track('Contact',{value:0,currency:'ILS',event_id:eid}); }catch(_){}
         try{ snaptr('track','LEAD',{price:0,currency:'ILS',event_id:eid}); }catch(_){}
 
-        // إرسال النموذج إلى Taskey (iframe) لتسجيل الليد
+        // غيّر القناة لتوثيق أن الطلب جاء من خطوة التأكيد
+        try{ document.getElementById('channelField').value = 'HTML Channel (WA Modal Confirmed)'; }catch(_){}
+
+        // سجّل الليد في Taskey
         try{ document.getElementById('leadForm')?.submit(); }catch(_){}
-        // ملاحظة نجاح مرئي
+        // ملاحظة نجاح
         try{
           var ok=document.getElementById('okNote'); ok.style.display='block';
           setTimeout(function(){ ok.style.display='none'; }, 5000);
@@ -369,38 +422,32 @@
         closeWAModal();
       };
 
-      // اربط زر الإرسال ليفتح المعاينة
+      // ربط الأزرار
       document.addEventListener('DOMContentLoaded', function(){
         var btn = document.getElementById('submitBtn');
         if(btn){
           btn.type = 'button';
-          btn.addEventListener('click', openWhatsAppPreview, {passive:true});
+          btn.textContent = TXT.btnForm;
+          btn.addEventListener('click', openWAModal, {passive:true});
+        }
+        // ترجمات إضافية
+        if(isHe){
+          document.title = 'מבצע מיאמי';
+          document.getElementById('progressBarText').innerText = 'נשאר שלב אחד להשלמת ההזמנה';
+          document.getElementById('stockAlert').innerHTML = '⏳ נותרו רק <b>5</b> לקוחות שיכולים לקבל את מבצע <b>מיאמי</b> לפני סיום ההטבה!';
+          document.getElementById('countdownLabel').textContent = 'המבצע מסתיים בעוד ';
+          document.getElementById('formTitle').innerHTML = 'אני מעוניין להזמין את חבילת <b>מיאמי</b> (תשלום בעת המסירה)';
+          document.getElementById('name').placeholder = 'שם מלא';
+          document.getElementById('phone').placeholder = 'מספר טלפון';
+          document.getElementById('address').placeholder = 'כתובת';
+          document.getElementById('note').placeholder = 'הערות (אופציונלי)';
+          document.getElementById('btnPayBottom').innerText = TXT.pay;
+          document.getElementById('btnOrderBottom').innerText = TXT.orderBottom;
         }
       });
     })();
 
-    // ترجمة للعبرية لعناصر الصفحة
-    (function i18n(){
-      var he = (navigator.language||'').includes('he');
-      if(!he) return;
-      document.title = 'מבצע מיאמי';
-      document.getElementById('progressBarText').innerText = 'נשאר שלב אחד להשלמת ההזמנה';
-      document.getElementById('stockAlert').innerHTML = '⏳ נותרו רק <b>5</b> לקוחות שיכולים לקבל את מבצע <b>מיאמי</b> לפני סיום ההטבה!';
-      document.getElementById('countdownLabel').textContent = 'המבצע מסתיים בעוד ';
-      document.getElementById('formTitle').innerHTML = 'אני מעוניין להזמין את חבילת <b>מיאמי</b> (תשלום בעת המסירה)';
-      document.getElementById('name').placeholder = 'שם מלא';
-      document.getElementById('phone').placeholder = 'מספר טלפון';
-      document.getElementById('address').placeholder = 'כתובת';
-      document.getElementById('note').placeholder = 'הערות (אופציונלי)';
-      document.getElementById('submitBtn').innerText = 'אישור הזמנה (תשלום בעת המסירה)';
-      document.getElementById('btnPayBottom').innerText = 'שלם עכשיו';
-      document.getElementById('btnOrderBottom').innerText = 'הזמן עכשיו – תשלום בעת המסירה';
-      document.getElementById('sheetTitle').innerText = 'בחרו אמצעי תשלום';
-      document.getElementById('sheetClose').innerText = 'סגור';
-      document.getElementById('fabCall').setAttribute('aria-label','שיחה');
-    })();
-
-    // Padding سفلي لعدم تغطية المحتوى بالشريط
+    // Padding سفلي
     try{ document.body.classList.add('has-bottom-bar'); }catch(_){}
   </script>
 </body>
