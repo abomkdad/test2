@@ -52,6 +52,367 @@
   <!-- ========== /TikTok Pixel Code ========== -->
 
   <style>
+    :root{ --green:#22c55e; --green-600:#16a34a; --blue:#1a73e8; --bg:#111; --card:#1e1e1e; --muted:#9ca3af; --real100vh:100svh }
+    *{box-sizing:border-box}
+    html{ -webkit-text-size-adjust:100%; height:100%; overscroll-behavior:none }
+    body{ height:100%; overscroll-behavior:none }
+    input,textarea,select{ font-size:16px }
+
+    body{ margin:0; font-family:Arial,Helvetica,sans-serif; background:var(--bg); color:#fff; direction:rtl }
+    .banner{ width:100%; display:block; max-width:100%; height:auto; }
+
+    .progress-container{ background:#000; padding:16px 0; text-align:center }
+    .progress-wrapper{ background:#fff; border-radius:50px; overflow:hidden; margin:0 auto; width:80%; max-width:420px }
+    .progress-bar{ background:var(--green); padding:10px; color:#fff; font-weight:bold; border-radius:50px }
+
+    .alert{ background:#0f172a; color:#cbd5e1; padding:10px; text-align:center }
+    .alert .accent{ color:#60a5fa; font-weight:700 }
+    .countdown{ font-weight:800; color:#fbbf24; }
+
+    .form-container{ background:var(--card); padding:20px; margin:20px; border-radius:12px; max-width:520px; margin-left:auto; margin-right:auto }
+    .form-container h2{ text-align:center; margin-top:0 }
+    .form-group{ margin-bottom:12px }
+    .form-group input,.form-group textarea{ width:100%; padding:12px; border-radius:8px; border:1px solid #2a2a2a; background:#121212; color:#fff; font-size:16px; line-height:1.4 }
+    .form-group textarea{ resize:none }
+    .submit-button{ background:var(--green); border:none; padding:14px; color:#0b1b10; width:100%; font-size:16px; font-weight:800; border-radius:10px; cursor:pointer }
+    .submit-button:active{ transform:translateY(1px) }
+    .ok-note{ display:none; margin-top:8px; color:#a7f3d0; font-size:14px; text-align:center }
+
+    video{ width:100%; max-height:70vh; display:block; margin:20px auto; border-radius:12px }
+
+    /* الشريط السفلي: زرّين بنفس الحجم */
+    .bottom-action-bar{ position:fixed; left:0; right:0; bottom:0; z-index:9999; background:#0f0f0f;
+      border-top:1px solid rgba(255,255,255,.1);
+      padding:10px calc(12px + env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) calc(12px + env(safe-area-inset-left));
+      display:flex; gap:10px; align-items:center; justify-content:space-between; box-shadow:0 -8px 20px rgba(0,0,0,.35) }
+    .bottom-action-bar .btn{ flex:1; display:flex; align-items:center; justify-content:center; gap:8px;
+      height:48px; border-radius:10px; border:none; cursor:pointer; font-weight:800; font-size:15px; text-decoration:none; touch-action:manipulation }
+    .btn-pay{ background:var(--blue); color:#fff }
+    .btn-order{ background:var(--green); color:#0b1b10 }
+    @media (min-width:768px){ .bottom-action-bar{ width:680px; margin:0 auto; left:0; right:0 } }
+    .has-bottom-bar{ padding-bottom:88px }
+
+    /* زر اتصال عائم */
+    .call-fab{ position:fixed; right:16px; bottom:88px; width:56px; height:56px; border-radius:999px; background:#0ea5e9; color:#fff;
+      display:flex; align-items:center; justify-content:center; font-weight:900; box-shadow:0 8px 20px rgba(0,0,0,.35); z-index:10000; text-decoration:none; font-size:22px }
+
+    /* شيت الدفع */
+    .sheet{ position:fixed; left:0; right:0; bottom:-100%; background:#0f0f10; border-top-left-radius:16px; border-top-right-radius:16px;
+      padding:16px; box-shadow:0 -30px 60px rgba(0,0,0,.5); transition:bottom .25s ease; z-index:10001 }
+    .sheet.open{ bottom:0 }
+    .sheet .sheet-title{ text-align:center; margin:0 0 12px; font-size:18px; font-weight:800 }
+    .pay-grid{ display:grid; grid-template-columns:1fr 1fr; gap:10px; margin:8px 0 6px }
+    .pay-opt{ display:flex; align-items:center; justify-content:center; height:48px; border-radius:12px; font-weight:800; text-decoration:none; color:#fff; border:1px solid rgba(255,255,255,.15) }
+    .pay-opt:hover{ filter:brightness(1.05) } .pay-opt:active{ transform:translateY(1px) }
+    .pay-bit{ background:#0ea5e9 } .pay-visa{ background:#1a73e8 } .pay-apple{ background:#111; border-color:#333 } .pay-gpay{ background:#0b5; color:#041 }
+    .sheet-close{ display:block; text-align:center; margin-top:8px; color:#9ca3af; text-decoration:underline; cursor:pointer }
+
+    /* ==== WA Confirmation Sheet (full-screen ثابتة تماماً) ==== */
+    .wa-sheet{position:fixed;inset:0;z-index:2147483646;display:none;background:#0b141a;color:#fff;font-family:Arial,Helvetica,sans-serif;overscroll-behavior:contain;contain:layout paint size}
+    .wa-sheet.show{display:flex;flex-direction:column;min-height:var(--real100vh);height:var(--real100vh)}
+    body.wa-open{overflow:hidden;position:fixed;width:100%}
+    .wa-temporary-hide{display:none!important}
+    .wa-sheet .sheet-body{flex:1;overflow:auto;padding:16px; padding-top:calc(env(safe-area-inset-top) + 8px);
+      background:#111c21 url('https://upload.wikimedia.org/wikipedia/commons/0/07/WhatsApp_Chat_Background_2021.png') center/cover repeat}
+    .wa-sheet .sheet-footer{position:sticky;bottom:0;background:#0b141a;padding:12px; padding-bottom:calc(12px + env(safe-area-inset-bottom)); border-top:1px solid rgba(255,255,255,.08)}
+    .wa-sheet .notice{color:#ffd166;font-weight:800;margin:0 0 8px}
+    .wa-sheet label{display:flex;align-items:center;gap:8px;color:#ddd;margin-bottom:10px;font-size:14px}
+    .wa-sheet .btn{height:48px;border:none;border-radius:12px;font-weight:800;cursor:pointer;touch-action:manipulation}
+    .wa-sheet .btn-send{background:#25d366;color:#0b3d1f;width:100%}
+    .wa-bubble{display:inline-block;background:#075e54;color:#fff;padding:10px 12px;border-radius:12px;max-width:90%}
+
+    /* غلاف التطبيق يملأ الارتفاع الحقيقي للشاشة لمنع تغيّر الحجم */
+    .app-shell{min-height:var(--real100vh)}
+  </style>
+</head>
+<body>
+  <main class="app-shell" id="appShell">
+  <img src="Untitled design (6).png" alt="عرض ميامي" class="banner" />
+
+  <div class="progress-container">
+    <div class="progress-wrapper">
+      <div class="progress-bar" id="progressBarText">تبقى خطوة لاتمام الطلب</div>
+    </div>
+  </div>
+
+  <div class="alert">
+    <div id="stockAlert"><span class="accent">⏳</span> تبقّى <b>5</b> عملاء فقط يمكنهم الحصول على عرض <b>ميامي</b> قبل انتهاء العرض!</div>
+    <div class="countdown" id="countdownBox"><span id="countdownLabel">ينتهي العرض خلال </span><span id="countdown">--:--:--</span></div>
+  </div>
+
+  <div class="form-container" id="orderForm">
+    <h2 id="formTitle">أرغب بطلب مجموعة <b>ميامي</b> (الدفع عند الاستلام)</h2>
+
+    <!-- إرسال مباشر إلى Taskey بدون توكن -->
+    <iframe name="taskeyFrame" style="display:none"></iframe>
+    <form id="leadForm" action="https://mad.taskey.co.il/webapi/AddLead.php" method="POST" target="taskeyFrame">
+      <div class="form-group"><input type="text" id="name" name="name" placeholder="الاسم الكامل" required /></div>
+      <div class="form-group"><input type="tel" id="phone" name="phone" placeholder="رقم الهاتف" required /></div>
+      <div class="form-group"><input type="text" id="address" name="address" placeholder="العنوان" /></div>
+      <div class="form-group"><textarea id="note" name="comment" rows="3" placeholder="ملاحظات (اختياري)"></textarea></div>
+
+      <!-- خرائط الحقول التي يفهمها Taskey -->
+      <input type="hidden" name="source"  id="utm_source"  value="Miami landing">
+      <input type="hidden" name="campaign" id="utm_campaign" value="">
+      <input type="hidden" name="adset"    id="utm_medium"   value="">
+      <input type="hidden" name="ad"       id="utm_ad"       value="">
+      <input type="hidden" name="channel"  id="channelField" value="HTML Channel (WA Modal)">
+      <input type="hidden" name="description" id="descField" value="طلب مجموعة ميامي (الدفع عند الاستلام)">
+
+      <button class="submit-button" type="button" id="submitBtn">اطلب الآن – الدفع عند الاستلام</button>
+      <div class="ok-note" id="okNote">✅ تم استلام طلبك، سنتواصل معك قريبًا</div>
+    </form>
+  </div>
+
+  <video autoplay muted playsinline onclick="toggleMute(this)">
+    <source src="https://madperfume.ps/upload/07-2025/page/Copy%20of%2028.mp4" type="video/mp4" />
+  </video>
+  </main>
+
+  <!-- الشريط السفلي (زرّين بنفس الحجم) -->
+  <div class="bottom-action-bar" dir="rtl" id="bottomBar">
+    <button class="btn btn-pay"   type="button" onclick="openPaySheet()" id="btnPayBottom">ادفع الآن</button>
+    <button class="btn btn-order" type="button" onclick="openWaSheet()" id="btnOrderBottom">اطلب الآن – الدفع عند الاستلام</button>
+  </div>
+
+  <!-- زر اتصال عائم -->
+  <a class="call-fab" href="tel:+972506164130" id="fabCall" aria-label="اتصال">☎</a>
+
+  <!-- شيت الدفع -->
+  <div class="sheet" id="paySheet" aria-hidden="true">
+    <div class="sheet-title" id="sheetTitle">اختر وسيلة الدفع</div>
+    <div class="pay-grid">
+      <a class="pay-opt pay-bit"  href="https://meshulam.co.il/purchase?b=87802251f9d461865f6ffbb8bafea2b4&method=bit"  target="_blank" rel="noopener" onclick="trackAddPaymentInfo('bit')">Bit</a>
+      <a class="pay-opt pay-visa" href="https://meshulam.co.il/purchase?b=87802251f9d461865f6ffbb8bafea2b4&method=visa" target="_blank" rel="noopener" onclick="trackAddPaymentInfo('visa')">VISA</a>
+      <a class="pay-opt pay-apple" href="https://meshulam.co.il/purchase?b=87802251f9d461865f6ffbb8bafea2b4&method=apple" target="_blank" rel="noopener" onclick="trackAddPaymentInfo('apple')">Apple&nbsp;Pay</a>
+      <a class="pay-opt pay-gpay" href="https://meshulam.co.il/purchase?b=87802251f9d461865f6ffbb8bafea2b4&method=gpay"  target="_blank" rel="noopener" onclick="trackAddPaymentInfo('gpay')">Google&nbsp;Pay</a>
+    </div>
+    <span class="sheet-close" onclick="closePaySheet()" id="sheetClose">إغلاق</span>
+  </div>
+
+  <!-- ==== WA Confirmation Sheet ==== -->
+  <div id="waSheet" class="wa-sheet" role="dialog" aria-modal="true" aria-labelledby="waTitle">
+    <div class="sheet-body" id="waPreview"></div>
+    <div class="sheet-footer">
+      <div class="notice" id="waNotice">⚠️ هذه الخطوة غير قابلة للتراجع.</div>
+      <label><input type="checkbox" id="waConfirm"> <span id="waCheckboxText">تأكيد: إرسال الطلب عبر واتساب الآن</span></label>
+      <button class="btn btn-send" id="waSendBtn" disabled>إرسال عبر واتساب</button>
+    </div>
+  </div>
+
+  <script>
+    /* ====== قفل الارتفاع الحقيقي للشاشة لمنع التلاعب ====== */
+    (function realVhLock(){
+      function setRealVh(){
+        var h = (window.visualViewport ? window.visualViewport.height : window.innerHeight) || document.documentElement.clientHeight;
+        document.documentElement.style.setProperty('--real100vh', h + 'px');
+      }
+      setRealVh();
+      window.addEventListener('resize', setRealVh);
+      window.addEventListener('orientationchange', setRealVh);
+      if(window.visualViewport){ window.visualViewport.addEventListener('resize', setRealVh); }
+      // تمنع تكبير Safari عند التركيز على الحقول (الحجم 16px موجود، لكن للاحتياط)
+      document.addEventListener('focusin', setRealVh);
+      document.addEventListener('focusout', setRealVh);
+    })();
+
+    function toggleMute(video){ video.muted = !video.muted }
+
+    function scrollToOrder(){
+      var el = document.getElementById('orderForm');
+      if(el){ el.scrollIntoView({behavior:'smooth', block:'start'}); }
+    }
+
+    // UTM → hidden fields
+    (function syncUTM(){
+      var p = new URLSearchParams(location.search);
+      if (p.get('utm_source'))  document.getElementById('utm_source').value  = p.get('utm_source');
+      if (p.get('utm_campaign'))document.getElementById('utm_campaign').value= p.get('utm_campaign');
+      if (p.get('utm_medium'))  document.getElementById('utm_medium').value  = p.get('utm_medium');
+      if (p.get('utm_ad'))      document.getElementById('utm_ad').value      = p.get('utm_ad');
+    })();
+
+    // فتح/إغلاق شيت الدفع + تتبّع
+    function openPaySheet(){
+      document.getElementById('paySheet').classList.add('open');
+      try{ fbq('track','InitiateCheckout'); ttq.track('InitiateCheckout'); snaptr('track','START_CHECKOUT'); }catch(_){}
+    }
+    function closePaySheet(){ document.getElementById('paySheet').classList.remove('open'); }
+    function trackAddPaymentInfo(method){
+      try{
+        fbq('track','AddPaymentInfo',{payment_method:method});
+        ttq.track('AddPaymentInfo',{content_type:method});
+        snaptr('track','ADD_BILLING',{payment_method:method});
+      }catch(_){}
+    }
+
+    // عدّاد انتهاء العرض (ساعتان من فتح الصفحة)
+    (function countdownStart(){
+      var end = Date.now() + 2*60*60*1000;
+      var el = document.getElementById('countdown');
+      function tick(){
+        var diff = end - Date.now();
+        if(diff < 0){ el.textContent = '00:00:00'; return; }
+        var h = Math.floor(diff/3600000);
+        var m = Math.floor((diff%3600000)/60000);
+        var s = Math.floor((diff%60000)/1000);
+        el.textContent = String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+        requestAnimationFrame(function(){ setTimeout(tick, 250); });
+      }
+      tick();
+    })();
+
+    /* ===== Helpers: hide fixed bars + قفل التمرير أثناء WA ===== */
+    const _waHiddenFixed = [];
+    let _waObserver = null;
+    let _scrollY = 0;
+    function hideAllFixedWhileOpen(){
+      _waHiddenFixed.length = 0;
+      document.querySelectorAll('body *').forEach(el=>{
+        if(el.closest('.wa-sheet')) return;
+        const cs = getComputedStyle(el);
+        if(cs.position==='fixed' || cs.position==='sticky'){
+          el.classList.add('wa-temporary-hide');
+          _waHiddenFixed.push(el);
+        }
+      });
+    }
+    function restoreHiddenFixed(){
+      _waHiddenFixed.forEach(el=>el.classList.remove('wa-temporary-hide'));
+      _waHiddenFixed.length = 0;
+    }
+    function lockBodyScroll(){
+      _scrollY = window.scrollY || 0;
+      document.body.style.top = '-' + _scrollY + 'px';
+      document.body.classList.add('wa-open');
+    }
+    function unlockBodyScroll(){
+      document.body.classList.remove('wa-open');
+      document.body.style.top = '';
+      window.scrollTo(0, _scrollY);
+    }
+
+    // ==== WA Sheet open/close & localization ====
+    function buildWAMessage(){
+      const name = document.getElementById('name')?.value?.trim() || '';
+      const phone = document.getElementById('phone')?.value?.trim() || '';
+      const address = document.getElementById('address')?.value?.trim() || '';
+      const note = document.getElementById('note')?.value?.trim() || 'لا يوجد';
+      const he = (navigator.language||'').includes('he');
+      return he
+        ? `שלום, אני מעוניין/ת בחבילת מיאמי:
+👤 שם: ${name}
+📞 טלפון: ${phone}
+🏠 כתובת: ${address}
+📝 הערה: ${note}`
+        : `مرحباً، أود طلب مجموعة ميامي:
+👤 الاسم: ${name}
+📞 الهاتف: ${phone}
+🏠 العنوان: ${address}
+📝 ملاحظة: ${note}`;
+    }
+
+    function localizeStatic(){
+      const he = (navigator.language||'').includes('he');
+      if(he){
+        document.title = 'מבצע מיאמי';
+        document.getElementById('progressBarText').innerText = 'נשאר שלב אחד להשלמת ההזמנה';
+        document.getElementById('stockAlert').innerHTML = '⏳ נותרו רק <b>5</b> לקוחות שיכולים לקבל את מבצע <b>מיאמי</b> לפני סיום ההטבה!';
+        document.getElementById('countdownLabel').textContent = 'המבצע מסתיים בעוד ';
+        document.getElementById('formTitle').innerHTML = 'אני מעוניין להזמין את חבילת <b>מיאמי</b> (תשלום בעת המסירה)';
+        document.getElementById('name').placeholder = 'שם מלא';
+        document.getElementById('phone').placeholder = 'מספר טלפון';
+        document.getElementById('address').placeholder = 'כתובת';
+        document.getElementById('note').placeholder = 'הערות (אופציונלי)';
+        document.getElementById('btnPayBottom').innerText = 'שלם עכשיו';
+        document.getElementById('btnOrderBottom').innerText = 'הזמן עכשיו – תשלום בעת המסירה';
+        document.getElementById('sheetTitle').innerText = 'בחר אמצעי תשלום';
+        document.getElementById('sheetClose').innerText = 'סגירה';
+      }
+    }
+
+    function openWaSheet(){
+      // Build bubble preview
+      const msg = buildWAMessage();
+      const he = (navigator.language||'').includes('he');
+
+      document.getElementById('waNotice').textContent = he ? '⚠️ פעולה זו בלתי הפיכה.' : '⚠️ هذه الخطوة غير قابلة للتراجع.';
+      document.getElementById('waCheckboxText').textContent = he ? 'אישור: שליחת ההודעה בוואטסאפ עכשיו' : 'تأكيد: إرسال الطلب عبر واتساب الآن';
+      document.getElementById('waSendBtn').textContent = he ? 'שלח ב-WhatsApp' : 'إرسال عبر واتساب';
+
+      const prev = document.getElementById('waPreview');
+      prev.innerHTML = `<div style="padding:14px"><div class="wa-bubble">${msg.replace(/
+/g,'<br>')}</div></div>`;
+
+      document.getElementById('waConfirm').checked = false;
+      document.getElementById('waSendBtn').disabled = true;
+
+      lockBodyScroll();
+      document.getElementById('waSheet').classList.add('show');
+      hideAllFixedWhileOpen();
+
+      if(!_waObserver){
+        _waObserver = new MutationObserver(()=>{ if(document.body.classList.contains('wa-open')) hideAllFixedWhileOpen(); });
+        _waObserver.observe(document.body,{childList:true,subtree:true});
+      }
+    }
+    function closeWaSheet(){
+      document.getElementById('waSheet').classList.remove('show');
+      unlockBodyScroll();
+      restoreHiddenFixed();
+    }
+
+    // Enable send only after confirm
+    const _waConfirmEl = document.getElementById('waConfirm');
+    const _waSendBtn = document.getElementById('waSendBtn');
+    _waConfirmEl.addEventListener('change',()=>{ _waSendBtn.disabled = !_waConfirmEl.checked; });
+
+    // Send to WhatsApp + Taskey submit + tracking
+    _waSendBtn.addEventListener('click',()=>{
+      if(_waSendBtn.disabled) return;
+      const msg = buildWAMessage();
+      const url = 'https://wa.me/972506164130?text=' + encodeURIComponent(msg);
+      try{ fbq('track','Lead'); ttq.track('Contact'); snaptr('track','LEAD'); }catch(e){}
+      try{ document.getElementById('channelField').value = 'HTML Channel (WA Modal Confirmed)'; document.getElementById('leadForm')?.submit(); }catch(e){}
+      try{ var ok=document.getElementById('okNote'); ok.style.display='block'; setTimeout(function(){ ok.style.display='none'; }, 5000); }catch(e){}
+      window.open(url,'_blank');
+      closeWaSheet();
+    });
+
+    // Hook form primary button to open WA sheet (instead of native submit)
+    document.addEventListener('DOMContentLoaded', function(){
+      localizeStatic();
+      var btn = document.getElementById('submitBtn');
+      if(btn){ btn.type = 'button'; btn.addEventListener('click', openWaSheet, {passive:true}); }
+    });
+
+    // Padding سفلي
+    try{ document.body.classList.add('has-bottom-bar'); }catch(_){ }
+
+    // Make available globally for inline handler
+    window.openWaSheet = openWaSheet;
+    window.closeWaSheet = closeWaSheet;
+  </script>
+</body>
+</html>
+
+  <!-- ========== TikTok Pixel Code ========== -->
+  <script>
+    !function (w,d,t){
+      w.TiktokAnalyticsObject=t; var ttq=w[t]=w[t]||[];
+      ttq.methods=["page","track","identify","instances","debug","on","off","once","ready","alias","group","enableCookie","disableCookie","holdConsent","revokeConsent","grantConsent"];
+      ttq.setAndDefer=function(t,e){t[e]=function(){t.push([e].concat([].slice.call(arguments,0)))}};for(var i=0;i<ttq.methods.length;i++) ttq.setAndDefer(ttq,ttq.methods[i]);
+      ttq.load=function(e,n){var r="https://analytics.tiktok.com/i18n/pixel/events.js";
+        ttq._i=ttq._i||{}; ttq._i[e]=[]; ttq._i[e]._u=r; ttq._t=ttq._t||{}; ttq._t[e]=+new Date; ttq._o=ttq._o||{}; ttq._o[e]=n||{};
+        n=document.createElement("script"); n.type="text/javascript"; n.async=!0; n.src=r+"?sdkid="+e+"&lib="+t;
+        e=document.getElementsByTagName("script")[0]; e.parentNode.insertBefore(n,e)
+      };
+      ttq.load('D2B1O33C77U89NHRM5J0'); ttq.page();
+    }(window,document,'ttq');
+  </script>
+  <!-- ========== /TikTok Pixel Code ========== -->
+
+  <style>
     :root{ --green:#22c55e; --green-600:#16a34a; --blue:#1a73e8; --bg:#111; --card:#1e1e1e; --muted:#9ca3af }
     *{box-sizing:border-box}
     html{ -webkit-text-size-adjust:100%; height:100% }
